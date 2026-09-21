@@ -1,0 +1,349 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kitchen &amp; Floors Budget</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ground:#f3f5f4; --panel:#ffffff; --ink:#1c2628; --muted:#5d6b6c; --line:#d5dcdb;
+  --accent:#2c6e68; --accent-soft:#dcebe8; --fee:#a8621b; --fee-soft:#f6e8d8; --off:#9aa5a5;
+  --display:"Barlow Condensed","Arial Narrow",sans-serif;
+  --body:"IBM Plex Sans",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#121a1b; --panel:#1a2426; --ink:#e3eae9; --muted:#95a3a3; --line:#2e3b3d;
+    --accent:#6fb8ae; --accent-soft:#1f3634; --fee:#e0a15c; --fee-soft:#3a2c1c; --off:#5c6a6b;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#121a1b; --panel:#1a2426; --ink:#e3eae9; --muted:#95a3a3; --line:#2e3b3d;
+  --accent:#6fb8ae; --accent-soft:#1f3634; --fee:#e0a15c; --fee-soft:#3a2c1c; --off:#5c6a6b;
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size:14px;line-height:1.45}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:16px;padding-block:28px 64px;display:flex;flex-direction:column;gap:22px}
+h1,h2{font-family:var(--display);font-weight:600;letter-spacing:.01em;margin:0;text-wrap:balance}
+h1{font-size:2.3rem;line-height:1.05}
+h2{font-size:1.35rem;text-transform:uppercase;letter-spacing:.05em}
+.sub{color:var(--muted);max-width:68ch;margin:6px 0 0}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+/* summary */
+.summary{display:grid;grid-template-columns:1.4fr 1fr;gap:16px}
+@media (max-width:760px){.summary{grid-template-columns:1fr}}
+.total{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+.label{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600}
+.big{font-family:var(--display);font-size:3.2rem;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.range{display:flex;gap:18px;flex-wrap:wrap;color:var(--muted)}
+.range b{color:var(--ink);font-weight:500}
+.bars{display:flex;flex-direction:column;gap:7px}
+.barrow{display:grid;grid-template-columns:110px 1fr 84px;gap:10px;align-items:center;font-size:.85rem}
+.bar{height:10px;background:var(--accent-soft);border-radius:2px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent)}
+.barrow .num{text-align:right}
+.split{display:flex;flex-direction:column;gap:6px;font-size:.9rem}
+.split div{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dashed var(--line);padding-bottom:5px}
+.split .feeline{color:var(--fee)}
+/* controls */
+.controls{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px 20px;display:flex;flex-direction:column;gap:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.field{display:flex;flex-direction:column;gap:4px}
+.field input{font-family:var(--mono);font-size:.95rem;padding:6px 8px;border:1px solid var(--line);border-radius:4px;background:var(--ground);color:var(--ink);width:100%}
+.field small{color:var(--muted)}
+.scope{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;cursor:pointer;user-select:none;background:var(--ground)}
+.chip:has(input:checked){background:var(--accent-soft);border-color:var(--accent)}
+.chip input{accent-color:var(--accent)}
+.warn{font-size:.85rem;color:var(--fee)}
+button{font-family:var(--body);font-size:.85rem;padding:6px 12px;border:1px solid var(--line);border-radius:4px;background:var(--panel);color:var(--ink);cursor:pointer}
+button:hover{border-color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+/* sections */
+section.area{background:var(--panel);border:1px solid var(--line);border-radius:6px}
+section.area.excluded{opacity:.5}
+.ahead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;padding:14px 20px;border-bottom:1px solid var(--line)}
+.ahead .num{font-size:1.05rem}
+.tbl{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:820px}
+th,td{padding:7px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+th{font-size:.7rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:600;background:var(--ground)}
+td.r,th.r{text-align:right}
+tr.off td{color:var(--off)}
+tr.off td .item{text-decoration:line-through}
+td input[type=number]{width:78px;font-family:var(--mono);font-size:.85rem;padding:3px 5px;border:1px solid transparent;border-radius:3px;background:transparent;color:inherit;text-align:right}
+td input[type=number]:hover,td input[type=number]:focus{border-color:var(--line);background:var(--ground)}
+td input[type=checkbox]{accent-color:var(--accent)}
+td.fee input{accent-color:var(--fee)}
+.item{font-weight:500}
+.note{display:block;font-size:.78rem;color:var(--muted);max-width:40ch}
+.feeamt{color:var(--fee)}
+.pill{font-size:.68rem;padding:1px 7px;border-radius:999px;background:var(--fee-soft);color:var(--fee);font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-left:6px;white-space:nowrap}
+.legend{font-size:.82rem;color:var(--muted);display:flex;gap:18px;flex-wrap:wrap}
+</style>
+</head><body style="margin:0">
+
+<div class="wrap">
+  <header>
+    <h1>Kitchen, Hall, Bath &amp; Mud Room Budget</h1>
+    <p class="sub">Itemized working estimate. Every quantity and price is editable; totals, the contractor fee, and contingency recalculate. <b>Likely</b> prices drive the headline; low/high set the range. Figures are 2026 national-average-style planning numbers, not quotes — replace them with bids as they come in.</p>
+  </header>
+
+  <div class="summary">
+    <div class="total">
+      <span class="label">Projected total (likely), all selected scope</span>
+      <span class="big" id="grand">—</span>
+      <div class="range num"><span>Low <b id="glo">—</b></span><span>High <b id="ghi">—</b></span></div>
+      <div class="bars" id="bars"></div>
+    </div>
+    <div class="total">
+      <span class="label">Where the money goes (likely)</span>
+      <div class="split num" id="split"></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center">
+      <h2>Scope &amp; assumptions</h2>
+      <span style="display:flex;gap:8px;flex-wrap:wrap"><button id="export" type="button">Copy my numbers</button><button id="reset" type="button">Reset to original estimate</button></span>
+    </div>
+    <div id="exportbox" hidden><p class="sub" style="margin:0 0 6px">Copied if your browser allowed it. If not, select all the text below, copy it, and paste it into your Claude chat.</p><textarea id="exporttext" readonly rows="4" style="width:100%;font-family:var(--mono);font-size:.78rem;background:var(--ground);color:var(--ink);border:1px solid var(--line);border-radius:4px;padding:8px"></textarea></div>
+    <div class="scope" id="scope"></div>
+    <div class="grid" id="params"></div>
+    <div class="warn" id="sfwarn"></div>
+    <div class="legend"><span>☑ first column = include line</span><span style="color:var(--fee)">☑ “+Fee” column = 20% applies (labor &amp; construction materials only — not tile, countertop material, or appliances)</span><span>Grey rows = optional / excluded</span></div>
+  </div>
+
+  <div id="sections" style="display:flex;flex-direction:column;gap:18px"></div>
+
+  <p class="sub" style="font-size:.82rem">Not included unless you add them: structural/framing surprises, relocating plumbing or gas, new lighting fixtures beyond rough-in, window/door work, hotel or eat-out costs during the kitchen outage, and sales tax on items not already in the unit price.</p>
+</div>
+
+<script id="model">
+const DEFAULT_PARAMS = {
+  kitchenSf:182.3, hallSf:28, bathSf:32, mudSf:192,
+  wastePct:12, heatPct:85, counterSf:50, splashSf:50,
+  feePct:20, contPct:10
+};
+const PARAM_META = [
+  ["kitchenSf","Kitchen floor (sq ft)","measured"],
+  ["hallSf","Hallway floor (sq ft)","measured"],
+  ["bathSf","Bathroom floor (sq ft)","measured"],
+  ["mudSf","Mud room floor (sq ft)","measured"],
+  ["wastePct","Floor tile overage %","10–15% for 18″ checker"],
+  ["heatPct","Heated coverage %","mats skip toilet/vanity/cabinets"],
+  ["counterSf","Quartz (sq ft)","you: 45–50"],
+  ["splashSf","Backsplash (sq ft)","you: 45–50"],
+  ["feePct","Contractor fee %","on marked lines"],
+  ["contPct","Contingency %","old-home surprises"]
+];
+const AREAS = [
+  {id:"general", name:"Project-wide", short:"Project-wide"},
+  {id:"kitchen", name:"Kitchen — floor, counters, backsplash, trades", short:"Kitchen", sf:"kitchenSf"},
+  {id:"appl", name:"Kitchen — appliances & fixtures", short:"Appliances", note:"No contractor fee on appliances or fixtures."},
+  {id:"cabinets", name:"Kitchen — cabinets (your installer, no fee)", short:"Cabinets", noCont:true},
+  {id:"hall", name:"Hallway — tile, heated floor, paint", short:"Hallway", sf:"hallSf"},
+  {id:"bath", name:"Bathroom — tile, heated floor, paint", short:"Bathroom", sf:"bathSf"},
+  {id:"mud", name:"Mud room — tile & heated floor", short:"Mud room", sf:"mudSf"}
+];
+const TILE = 11.57; // Merola Merzoni Checker Ruzzini 17-7/8" porcelain, $/sq ft
+const floorLines = (a, heated) => {
+  const sf = p => p[a.sf];
+  const L = [
+    {k:"demo", label:"Demo existing tile"+(heated?" + old heat mat":"")+" & haul", q:sf, u:"sf", lo:2.5, mid:3.5, hi:5, fee:1, note:"Old mortar beds can push this to the high end"},
+    {k:"prep", label:"Subfloor repair / leveling", q:sf, u:"sf", lo:1, mid:2, hi:4, fee:1, note:"Large 18″ tile needs a flat floor (lippage)"},
+    {k:"memb", label:"Uncoupling membrane (e.g., Ditra)", q:sf, u:"sf", lo:1.75, mid:2.5, hi:3.25, fee:1, note:"Materials; common over old wood subfloors"},
+    {k:"tile", label:"Floor tile — Merola Merzoni Checker Ruzzini", q:p=>sf(p)*(1+p.wastePct/100), u:"sf", lo:TILE, mid:TILE, hi:TILE, fee:0, note:"$11.57/sq ft incl. overage; tile is not subject to the fee"},
+    {k:"set", label:"Thinset, grout, sealer, trim pieces", q:sf, u:"sf", lo:1, mid:1.5, hi:2.25, fee:1},
+    {k:"lab", label:"Tile install labor (large format, checker layout)", q:sf, u:"sf", lo:8, mid:10.5, hi:14, fee:1, note:"Pattern alignment adds time vs. plain lay"}
+  ];
+  if(heated){
+    L.push({k:"mat", label:"New electric heat mat + sensor", q:p=>sf(p)*p.heatPct/100, u:"sf", lo:9, mid:12, hi:16, fee:1, note:"Existing thermostat & circuit reused"});
+    L.push({k:"elec", label:"Electrician: mat install check, reconnect, ohm test", q:()=>1, u:"ea", lo:300, mid:450, hi:700, fee:1});
+  }
+  L.push({k:"thr", label:"Thresholds / transitions", q:()=>1, u:"ls", lo:75, mid:150, hi:300, fee:1});
+  return L;
+};
+const LINES = {
+  general:[
+    {k:"permit", label:"Permits (electrical/plumbing as required)", q:()=>1, u:"ls", lo:250, mid:600, hi:1200, fee:0, note:"Pass-through; confirm with Jefferson County"},
+    {k:"test", label:"Asbestos / lead testing of old tile & paint", q:()=>1, u:"ls", lo:250, mid:450, hi:800, fee:1, note:"Recommended before demo in an older home"},
+    {k:"dump", label:"Dumpster / disposal", q:()=>1, u:"ls", lo:450, mid:650, hi:950, fee:1},
+    {k:"prot", label:"Floor protection, dust control, final clean", q:()=>1, u:"ls", lo:300, mid:600, hi:1000, fee:1}
+  ],
+  kitchen:[
+    ...floorLines({sf:"kitchenSf"}, false),
+    {k:"ctear", label:"Remove & dispose old countertops", q:()=>1, u:"ls", lo:200, mid:350, hi:600, fee:1},
+    {k:"quartzm", label:"Quartz slab material (mid-range group)", q:p=>p.counterSf, u:"sf", lo:40, mid:55, hi:75, fee:0, note:"Countertop material — no fee"},
+    {k:"quartzl", label:"Countertop fabrication, templating & install", q:p=>p.counterSf, u:"sf", lo:20, mid:30, hi:40, fee:1, note:"Labor — fee applies. Material + labor ≈ $85/sq ft installed"},
+    {k:"cut", label:"Sink cutout, faucet holes, edge upgrades", q:()=>1, u:"ls", lo:150, mid:350, hi:700, fee:1},
+    {k:"splash", label:"Backsplash tile — MSI Whisper White handcrafted 3×6", q:p=>p.splashSf*1.15, u:"sf", lo:10, mid:13, hi:16, fee:0, note:"Includes 15% overage; verify current price. No fee"},
+    {k:"splset", label:"Backsplash thinset, grout, edge trim", q:()=>1, u:"ls", lo:100, mid:175, hi:300, fee:1},
+    {k:"spllab", label:"Backsplash install labor", q:p=>p.splashSf, u:"sf", lo:16, mid:24, hi:32, fee:1, note:"Handmade-look tile is slower to set"},
+    {k:"plumb", label:"Plumber: sink, disposal, DW, fridge water line", q:()=>1, u:"ls", lo:600, mid:950, hi:1500, fee:1},
+    {k:"elec", label:"Electrician: counter GFCI outlets, appliance circuits", q:()=>1, u:"ls", lo:800, mid:1600, hi:3200, fee:1, note:"Old wiring often triggers code upgrades"},
+    {k:"dry", label:"Drywall patch after tear-out", q:()=>1, u:"ls", lo:300, mid:700, hi:1400, fee:1},
+    {k:"paint", label:"Paint kitchen walls & ceiling", q:()=>1, u:"ls", lo:600, mid:1000, hi:1600, fee:1},
+    {k:"uclight", label:"Under-cabinet lighting (optional)", q:()=>1, u:"ls", lo:400, mid:800, hi:1500, fee:1, off:1},
+    {k:"pend", label:"New ceiling / pendant fixtures (optional)", q:()=>1, u:"ls", lo:300, mid:800, hi:2000, fee:1, off:1}
+  ],
+  appl:[
+    {k:"fridge", label:"Refrigerator", q:()=>1, u:"ea", lo:1800, mid:3000, hi:5000, fee:0},
+    {k:"micro", label:"Microwave (over-range or drawer)", q:()=>1, u:"ea", lo:350, mid:650, hi:1500, fee:0},
+    {k:"sink", label:"Kitchen sink (undermount)", q:()=>1, u:"ea", lo:250, mid:500, hi:1000, fee:0},
+    {k:"faucet", label:"Kitchen faucet", q:()=>1, u:"ea", lo:200, mid:400, hi:800, fee:0},
+    {k:"disp", label:"Garbage disposal", q:()=>1, u:"ea", lo:150, mid:250, hi:400, fee:0},
+    {k:"hw", label:"Cabinet hardware (if not in cabinet quote)", q:()=>1, u:"ls", lo:200, mid:400, hi:900, fee:0, off:1},
+    {k:"dw", label:"Dishwasher (optional)", q:()=>1, u:"ea", lo:700, mid:1100, hi:1800, fee:0, off:1},
+    {k:"range", label:"Range / cooktop (optional)", q:()=>1, u:"ea", lo:900, mid:1800, hi:4000, fee:0, off:1},
+    {k:"hood", label:"Range hood (optional, if no OTR microwave)", q:()=>1, u:"ea", lo:250, mid:600, hi:1500, fee:0, off:1},
+    {k:"deliv", label:"Delivery, install & haul-away", q:()=>1, u:"ls", lo:100, mid:250, hi:450, fee:0}
+  ],
+  cabinets:[
+    {k:"cab", label:"Cabinets — build & install (your quote)", q:()=>1, u:"ls", lo:25000, mid:25000, hi:25000, fee:0, note:"Excluded from fee and contingency"}
+  ],
+  hall:[
+    ...floorLines({sf:"hallSf"}, true),
+    {k:"base", label:"Remove / reinstall or replace baseboard", q:()=>1, u:"ls", lo:200, mid:400, hi:750, fee:1},
+    {k:"paint", label:"Paint hallway walls, ceiling, trim", q:()=>1, u:"ls", lo:700, mid:1200, hi:2000, fee:1}
+  ],
+  bath:[
+    ...floorLines({sf:"bathSf"}, true),
+    {k:"toilet", label:"Pull & reset toilet, new wax ring/flange repair", q:()=>1, u:"ls", lo:200, mid:300, hi:550, fee:1},
+    {k:"vanity", label:"Pull & reset vanity (if tiling under it)", q:()=>1, u:"ls", lo:150, mid:300, hi:500, fee:1},
+    {k:"base", label:"Baseboard / shoe molding", q:()=>1, u:"ls", lo:100, mid:250, hi:450, fee:1},
+    {k:"paint", label:"Paint bathroom (moisture-resistant)", q:()=>1, u:"ls", lo:400, mid:700, hi:1100, fee:1}
+  ],
+  mud:[
+    ...floorLines({sf:"mudSf"}, true),
+    {k:"base", label:"Baseboard / shoe molding", q:()=>1, u:"ls", lo:150, mid:300, hi:550, fee:1}
+  ]
+};
+
+function compute(params, state){
+  // state: {scope:{area:bool}, rows:{"area.k":{on,fee,qty,lo,mid,hi}}}
+  const out = {areas:{}, lo:0, mid:0, hi:0, base:{lo:0,mid:0,hi:0}, fee:{lo:0,mid:0,hi:0}, cont:{lo:0,mid:0,hi:0}, cab:0};
+  for(const a of AREAS){
+    const inScope = state.scope[a.id] !== false;
+    const A = {rows:[], lo:0, mid:0, hi:0, inScope};
+    for(const L of LINES[a.id]){
+      const id = a.id+"."+L.k, o = state.rows[id] || {};
+      const on = o.on ?? !L.off;
+      const fee = o.fee ?? !!L.fee;
+      const qty = o.qty ?? L.q(params);
+      const pr = {lo:o.lo ?? L.lo, mid:o.mid ?? L.mid, hi:o.hi ?? L.hi};
+      const r = {id, L, on, fee, qty, pr, ext:{}, feeAmt:{}};
+      for(const t of ["lo","mid","hi"]){
+        r.ext[t] = qty*pr[t];
+        r.feeAmt[t] = fee ? r.ext[t]*params.feePct/100 : 0;
+        if(on && inScope){
+          const c = r.ext[t] + r.feeAmt[t];
+          const cont = a.noCont ? 0 : c*params.contPct/100;
+          A[t] += c + cont;
+          out.base[t] += r.ext[t]; out.fee[t] += r.feeAmt[t]; out.cont[t] += cont;
+          if(a.noCont && t==="mid") out.cab += r.ext[t];
+        }
+      }
+      A.rows.push(r);
+    }
+    out.areas[a.id] = A;
+    if(inScope){ out.lo += A.lo; out.mid += A.mid; out.hi += A.hi; }
+  }
+  return out;
+}
+</script>
+
+<script>
+const $ = s => document.querySelector(s);
+const money = n => "$" + Math.round(n).toLocaleString("en-US");
+const KEY = "reno-budget-v4";
+const DEFAULT_STATE = {"scope":{},"rows":{"general.permit":{"on":false},"general.test":{"on":false}}};
+let params, state;
+function load(){
+  try{ const s = JSON.parse(localStorage.getItem(KEY)); if(s){ params = {...DEFAULT_PARAMS, ...s.params}; state = s.state; return; } }catch(e){}
+  params = {...DEFAULT_PARAMS}; state = JSON.parse(JSON.stringify(DEFAULT_STATE));
+}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify({params, state})); }catch(e){} }
+
+function buildControls(){
+  $("#scope").innerHTML = AREAS.filter(a=>a.id!=="general").map(a =>
+    `<label class="chip"><input type="checkbox" id="scope-${a.id}" data-scope="${a.id}" ${state.scope[a.id]!==false?"checked":""}> ${a.short}</label>`).join("");
+  $("#params").innerHTML = PARAM_META.map(([k,l,h]) =>
+    `<label class="field" for="p-${k}"><span class="label">${l}</span><input id="p-${k}" type="number" step="any" min="0" data-param="${k}" value="${params[k]}"><small>${h}</small></label>`).join("");
+}
+function buildSections(){
+  $("#sections").innerHTML = AREAS.map(a => `
+    <section class="area" id="sec-${a.id}">
+      <div class="ahead"><h2>${a.name}</h2><span class="num" id="at-${a.id}"></span></div>
+      ${a.note?`<p class="sub" style="padding:10px 20px 0;margin:0;font-size:.85rem">${a.note}</p>`:""}
+      <div class="tbl"><table>
+        <thead><tr><th>Incl.</th><th>Item</th><th class="r">Qty</th><th>Unit</th><th class="r">Low $/u</th><th class="r">Likely $/u</th><th class="r">High $/u</th><th class="r">Likely cost</th><th class="r">+Fee</th><th class="r">Fee $</th></tr></thead>
+        <tbody>${LINES[a.id].map(L => {
+          const id = a.id+"."+L.k, sid = id.replace(".","-");
+          return `<tr data-row="${id}">
+            <td><input type="checkbox" id="on-${sid}" data-f="on" aria-label="Include ${L.label}"></td>
+            <td><span class="item">${L.label}</span>${L.note?`<span class="note">${L.note}</span>`:""}</td>
+            <td class="r"><input type="number" step="any" min="0" id="qty-${sid}" data-f="qty"></td>
+            <td>${L.u}</td>
+            <td class="r"><input type="number" step="any" min="0" id="lo-${sid}" data-f="lo"></td>
+            <td class="r"><input type="number" step="any" min="0" id="mid-${sid}" data-f="mid"></td>
+            <td class="r"><input type="number" step="any" min="0" id="hi-${sid}" data-f="hi"></td>
+            <td class="r num" data-o="ext"></td>
+            <td class="r fee"><input type="checkbox" id="fee-${sid}" data-f="fee" aria-label="Contractor fee applies"></td>
+            <td class="r num feeamt" data-o="fee"></td></tr>`;}).join("")}</tbody>
+      </table></div>
+    </section>`).join("");
+}
+function render(){
+  const R = compute(params, state);
+  $("#grand").textContent = money(R.mid);
+  $("#glo").textContent = money(R.lo);
+  $("#ghi").textContent = money(R.hi);
+  const max = Math.max(...AREAS.map(a=>R.areas[a.id].mid), 1);
+  $("#bars").innerHTML = AREAS.map(a => { const A=R.areas[a.id]; const v=A.inScope?A.mid:0;
+    return `<div class="barrow"><span>${a.short}</span><span class="bar"><i style="width:${v/max*100}%"></i></span><span class="num">${A.inScope?money(v):"excluded"}</span></div>`;}).join("");
+  $("#split").innerHTML = `
+    <div><span>Materials, labor &amp; purchases</span><span>${money(R.base.mid - R.cab)}</span></div>
+    <div class="feeline"><span>Contractor fee (${params.feePct}%)</span><span>${money(R.fee.mid)}</span></div>
+    <div><span>Contingency (${params.contPct}%)</span><span>${money(R.cont.mid)}</span></div>
+    <div><span>Cabinets (your installer)</span><span>${money(R.cab)}</span></div>
+    <div style="border:0;font-weight:600"><span>Total</span><span>${money(R.mid)}</span></div>
+    <div style="border:0;color:var(--muted);font-size:.8rem"><span>Fee range low–high</span><span>${money(R.fee.lo)} – ${money(R.fee.hi)}</span></div>`;
+  const floorSum = params.kitchenSf+params.hallSf+params.bathSf+params.mudSf;
+  $("#sfwarn").textContent = `Floor tile area: ${+floorSum.toFixed(1)} sq ft total.`;
+  for(const a of AREAS){
+    const A = R.areas[a.id];
+    $("#sec-"+a.id).classList.toggle("excluded", !A.inScope);
+    $("#at-"+a.id).textContent = A.inScope ? `${money(A.mid)}  (${money(A.lo)}–${money(A.hi)}) incl. fee & contingency` : "Not in scope";
+    for(const r of A.rows){
+      const tr = document.querySelector(`tr[data-row="${r.id}"]`);
+      tr.classList.toggle("off", !r.on);
+      const set = (f,v,isBox) => { const el = tr.querySelector(`[data-f="${f}"]`); if(document.activeElement!==el){ if(isBox) el.checked=v; else el.value=+v.toFixed(2); } };
+      set("on", r.on, true); set("fee", r.fee, true);
+      set("qty", r.qty); set("lo", r.pr.lo); set("mid", r.pr.mid); set("hi", r.pr.hi);
+      tr.querySelector('[data-o="ext"]').textContent = money(r.ext.mid);
+      tr.querySelector('[data-o="fee"]').textContent = r.fee ? money(r.feeAmt.mid) : "—";
+    }
+  }
+}
+document.addEventListener("input", e => {
+  const t = e.target;
+  if(t.dataset.param){ const v = parseFloat(t.value); if(!isNaN(v)){ params[t.dataset.param]=v;
+      // area / quantity params recompute derived quantities: drop stale overrides
+      for(const id in state.rows) delete state.rows[id].qty; } }
+  else if(t.dataset.scope){ state.scope[t.dataset.scope] = t.checked; }
+  else if(t.dataset.f){
+    const id = t.closest("tr").dataset.row; const o = state.rows[id] ||= {};
+    if(t.type==="checkbox") o[t.dataset.f] = t.checked;
+    else { const v = parseFloat(t.value); if(!isNaN(v)) o[t.dataset.f] = v; }
+  } else return;
+  save(); render();
+});
+$("#export").addEventListener("click", () => {
+  const txt = JSON.stringify({params, state});
+  const ta = $("#exporttext"); ta.value = txt; $("#exportbox").hidden = false; ta.focus(); ta.select();
+  try{ navigator.clipboard?.writeText(txt).then(()=>{$("#export").textContent="Copied ✓";}).catch(()=>{}); }catch(e){}
+});
+$("#reset").addEventListener("click", () => { try{localStorage.removeItem(KEY);}catch(e){} load(); buildControls(); render(); });
+load(); buildControls(); buildSections(); render();
+</script>
+</body></html>
