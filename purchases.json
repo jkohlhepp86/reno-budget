@@ -76,27 +76,49 @@
     "notes": "Quartz vs. quartzite — see countertop lookbook. ~70 sq ft incl. island. Material has no GC fee; fabrication/install labor may."
   },
   {
-    "item": "Refrigerator",
+    "item": "24.7 cu ft French-door refrigerator",
     "category": "Appliances",
     "room": "Kitchen",
-    "vendor": "", "brand": "", "model": "", "url": "",
-    "unit_price": null, "qty": 1, "unit": "ea",
-    "status": "Considering", "fee": false, "notes": ""
+    "vendor": "Home Depot",
+    "brand": "GE",
+    "model": "GNE25JYKFS",
+    "url": "https://www.homedepot.com/p/GE-24-7-cu-ft-French-Door-Refrigerator-in-Fingerprint-resistant-stainless-Steel-Energy-Star-GNE25JYKFS/319236498",
+    "unit_price": 1799,
+    "qty": 1,
+    "unit": "ea",
+    "status": "Ordered",
+    "fee": false,
+    "notes": "Fingerprint-resistant stainless, 32-3/4\" wide. Delivery Tue 2026-09-29. Price is Home Depot's listed sale price on 2026-09-25 — update if the receipt differs (tax, delivery, haul-away).",
+    "list_price": 2299
   },
   {
     "item": "Microwave",
     "category": "Appliances",
     "room": "Kitchen",
-    "vendor": "", "brand": "", "model": "", "url": "",
-    "unit_price": null, "qty": 1, "unit": "ea",
-    "status": "Considering", "fee": false, "notes": ""
+    "vendor": "",
+    "brand": "",
+    "model": "",
+    "url": "",
+    "unit_price": null,
+    "qty": 1,
+    "unit": "ea",
+    "status": "Considering",
+    "fee": false,
+    "notes": ""
   },
   {
     "item": "Kitchen sink",
     "category": "Fixtures",
     "room": "Kitchen",
-    "vendor": "", "brand": "", "model": "", "url": "",
-    "unit_price": null, "qty": 1, "unit": "ea",
-    "status": "Considering", "fee": false, "notes": "Undermount; fabricator needs the template/model before cutting."
+    "vendor": "",
+    "brand": "",
+    "model": "",
+    "url": "",
+    "unit_price": null,
+    "qty": 1,
+    "unit": "ea",
+    "status": "Considering",
+    "fee": false,
+    "notes": "Undermount; fabricator needs the template/model before cutting."
   }
 ]
