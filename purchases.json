@@ -1,0 +1,102 @@
+[
+  {
+    "item": "30\" slide-in electric double-oven range",
+    "category": "Appliances",
+    "room": "Kitchen",
+    "vendor": "Orsini's",
+    "brand": "GE",
+    "model": "JSS86SPSS",
+    "url": "https://www.orsinis.com/appliances/cooking/ranges/slide-in-electric-range/ge-appliances/JSS86SPSS",
+    "unit_price": 2199.99,
+    "list_price": 2599.99,
+    "qty": 1,
+    "unit": "ea",
+    "status": "Selected",
+    "fee": false,
+    "notes": "Stainless. Radiant (not induction) cooktop, 6.7 cu ft total, two convection ovens. Price is the sale price seen 2026-09-25. Give the install spec sheet (circuit + cutout) to the electrician, cabinet installer and countertop fabricator."
+  },
+  {
+    "item": "Kitchen cabinets (supply + install)",
+    "category": "Cabinets",
+    "room": "Kitchen",
+    "vendor": "",
+    "brand": "",
+    "model": "",
+    "url": "",
+    "unit_price": 25000,
+    "qty": 1,
+    "unit": "ls",
+    "status": "Selected",
+    "fee": false,
+    "notes": "Light gray perimeter, navy island. Own installer; outside the GC fee."
+  },
+  {
+    "item": "Floor tile — Merzoni Checker Ruzzini 17-7/8\" porcelain",
+    "category": "Tile",
+    "room": "Kitchen, hall, bath, mud room",
+    "vendor": "",
+    "brand": "Merola",
+    "model": "Merzoni Checker Ruzzini",
+    "url": "",
+    "unit_price": 11.57,
+    "qty": 550,
+    "unit": "sf",
+    "status": "Selected",
+    "fee": false,
+    "notes": "~550 sq ft across all spaces. Confirm overage (typically +10%) before ordering."
+  },
+  {
+    "item": "Backsplash — Whisper White 3x6 glossy ceramic",
+    "category": "Tile",
+    "room": "Kitchen",
+    "vendor": "",
+    "brand": "MSI",
+    "model": "Whisper White handcrafted 3x6",
+    "url": "",
+    "unit_price": null,
+    "qty": 50,
+    "unit": "sf",
+    "status": "Selected",
+    "fee": false,
+    "notes": "~45–50 sq ft. Price TBD."
+  },
+  {
+    "item": "Countertops",
+    "category": "Countertops",
+    "room": "Kitchen",
+    "vendor": "",
+    "brand": "",
+    "model": "",
+    "url": "countertops.html",
+    "unit_price": null,
+    "qty": 70,
+    "unit": "sf",
+    "status": "Considering",
+    "fee": false,
+    "notes": "Quartz vs. quartzite — see countertop lookbook. ~70 sq ft incl. island. Material has no GC fee; fabrication/install labor may."
+  },
+  {
+    "item": "Refrigerator",
+    "category": "Appliances",
+    "room": "Kitchen",
+    "vendor": "", "brand": "", "model": "", "url": "",
+    "unit_price": null, "qty": 1, "unit": "ea",
+    "status": "Considering", "fee": false, "notes": ""
+  },
+  {
+    "item": "Microwave",
+    "category": "Appliances",
+    "room": "Kitchen",
+    "vendor": "", "brand": "", "model": "", "url": "",
+    "unit_price": null, "qty": 1, "unit": "ea",
+    "status": "Considering", "fee": false, "notes": ""
+  },
+  {
+    "item": "Kitchen sink",
+    "category": "Fixtures",
+    "room": "Kitchen",
+    "vendor": "", "brand": "", "model": "", "url": "",
+    "unit_price": null, "qty": 1, "unit": "ea",
+    "status": "Considering", "fee": false, "notes": "Undermount; fabricator needs the template/model before cutting."
+  }
+]

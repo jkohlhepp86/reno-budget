@@ -1,0 +1,98 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Purchase Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--ground:#f3f5f4;--panel:#fff;--ink:#1c2628;--muted:#5d6b6c;--line:#d5dcdb;--accent:#2c6e68;--accent-soft:#dcebe8;--fee:#a8621b;--fee-soft:#f6e8d8;--off:#9aa5a5;
+--display:"Barlow Condensed","Arial Narrow",sans-serif;--body:"IBM Plex Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ground:#121a1b;--panel:#1a2426;--ink:#e3eae9;--muted:#95a3a3;--line:#2e3b3d;--accent:#6fb8ae;--accent-soft:#1f3634;--fee:#e0a15c;--fee-soft:#3a2c1c;--off:#5c6a6b}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);font-size:14px;line-height:1.45}
+.wrap{max-width:1080px;margin:0 auto;padding:24px 16px 64px;display:flex;flex-direction:column;gap:20px}
+a{color:var(--accent)}
+.crumb{font-size:.85rem}
+h1{font-family:var(--display);font-weight:600;font-size:2.3rem;line-height:1.05;margin:0}
+.sub{color:var(--muted);margin:6px 0 0;max-width:70ch}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.label{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.tile .v{font-family:var(--display);font-size:2rem;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.tile .s{color:var(--muted);font-size:.8rem}
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.filters button{font:inherit;font-size:.85rem;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:5px 12px;border-radius:999px;cursor:pointer}
+.filters button.on{background:var(--accent);border-color:var(--accent);color:var(--ground)}
+.filters .sep{width:1px;height:20px;background:var(--line);margin:0 4px}
+.list{display:flex;flex-direction:column;gap:10px}
+.row{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 16px;display:grid;grid-template-columns:1fr auto;gap:4px 16px}
+.row .t{font-weight:600;font-size:1rem}
+.row .m{color:var(--muted);font-size:.85rem}
+.row .price{text-align:right;font-size:1rem}
+.row .price small{display:block;color:var(--muted);font-size:.75rem}
+.row .notes{grid-column:1/-1;font-size:.85rem}
+.pill{display:inline-block;font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;padding:2px 8px;border-radius:4px;margin-right:6px;vertical-align:1px}
+.st-Considering{background:var(--line);color:var(--muted)}
+.st-Selected{background:var(--accent-soft);color:var(--accent)}
+.st-Ordered,.st-Delivered{background:var(--fee-soft);color:var(--fee)}
+.st-Installed{background:var(--accent);color:var(--ground)}
+.feeflag{color:var(--fee);font-size:.75rem}
+.cats{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px 16px}
+.cats table{width:100%;border-collapse:collapse}
+.cats td,.cats th{padding:6px 4px;border-bottom:1px solid var(--line);text-align:right}
+.cats td:first-child,.cats th:first-child{text-align:left}
+.cats tr:last-child td{border-bottom:0;font-weight:600}
+.help{color:var(--muted);font-size:.85rem}
+.err{background:var(--fee-soft);color:var(--fee);padding:12px;border-radius:6px}
+</style></head><body><div class="wrap">
+<div class="crumb"><a href="./">← Renovation home</a></div>
+<header>
+<h1>Purchase Tracker</h1>
+<p class="sub">Every appliance, fixture and material being bought for the renovation, with its price and where it stands. Prices marked “TBD” aren't in the totals yet.</p>
+</header>
+<section class="tiles" id="tiles"></section>
+<section class="cats"><div class="label" style="margin-bottom:6px">By category</div><table id="cats"></table></section>
+<section class="filters" id="filters"></section>
+<section class="list" id="list"></section>
+<p class="help">Statuses: Considering → Selected → Ordered → Delivered → Installed. “Committed” = Ordered, Delivered or Installed. Items flagged “+20% GC fee” include the contractor's fee in their totals; appliances, tile, countertop material and cabinets are fee-free. Data lives in <a href="purchases.json">purchases.json</a>.</p>
+</div>
+<script>
+const STATUSES=["Considering","Selected","Ordered","Delivered","Installed"];
+const COMMITTED=new Set(["Ordered","Delivered","Installed"]);
+const FEE=0.20;
+const $=s=>document.querySelector(s);
+const money=v=>v==null?"TBD":v.toLocaleString("en-US",{style:"currency",currency:"USD",maximumFractionDigits:v%1?2:0,minimumFractionDigits:v%1?2:0});
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const total=i=>i.unit_price==null?null:i.unit_price*(i.qty||1)*(i.fee?1+FEE:1);
+let items=[],fStatus="All",fCat="All";
+function sum(arr){return arr.reduce((a,i)=>a+(total(i)||0),0)}
+function render(){
+  const priced=items.filter(i=>i.unit_price!=null);
+  const committed=items.filter(i=>COMMITTED.has(i.status));
+  const planned=items.filter(i=>i.status!=="Considering");
+  $("#tiles").innerHTML=[
+    ["Committed",money(sum(committed)),`${committed.length} item${committed.length==1?"":"s"} ordered or later`],
+    ["Selected + committed",money(sum(planned)),`${planned.length} items chosen`],
+    ["All priced items",money(sum(priced)),`${items.length-priced.length} still TBD`],
+    ["Items tracked",String(items.length),`${items.filter(i=>i.status==="Installed").length} installed`]
+  ].map(([l,v,s])=>`<div class="tile"><div class="label">${l}</div><div class="v">${v}</div><div class="s">${s}</div></div>`).join("");
+  const cats=[...new Set(items.map(i=>i.category))];
+  $("#cats").innerHTML=`<tr><th class="label">Category</th><th class="label">Committed</th><th class="label">Selected+</th><th class="label">TBD</th></tr>`+
+    cats.map(c=>{const it=items.filter(i=>i.category===c);return `<tr><td>${esc(c)}</td><td class="num">${money(sum(it.filter(i=>COMMITTED.has(i.status))))}</td><td class="num">${money(sum(it.filter(i=>i.status!=="Considering")))}</td><td class="num">${it.filter(i=>i.unit_price==null).length}</td></tr>`}).join("")+
+    `<tr><td>Total</td><td class="num">${money(sum(committed))}</td><td class="num">${money(sum(planned))}</td><td class="num">${items.filter(i=>i.unit_price==null).length}</td></tr>`;
+  const btn=(v,cur,kind)=>`<button data-k="${kind}" data-v="${esc(v)}" class="${v===cur?"on":""}">${esc(v)}</button>`;
+  $("#filters").innerHTML=["All",...STATUSES].map(s=>btn(s,fStatus,"s")).join("")+`<span class="sep"></span>`+["All",...cats].map(c=>btn(c,fCat,"c")).join("");
+  const shown=items.filter(i=>(fStatus==="All"||i.status===fStatus)&&(fCat==="All"||i.category===fCat));
+  $("#list").innerHTML=shown.map(i=>{
+    const meta=[i.category,i.room,[i.brand,i.model].filter(Boolean).join(" "),i.vendor].filter(Boolean).map(esc).join(" · ");
+    const t=total(i);
+    const unit=i.unit_price==null?"":`${money(i.unit_price)} × ${i.qty} ${esc(i.unit)}`;
+    const was=i.list_price&&i.list_price>i.unit_price?` <s>${money(i.list_price)}</s>`:"";
+    const name=i.url?`<a href="${esc(i.url)}" target="_blank" rel="noopener">${esc(i.item)}</a>`:esc(i.item);
+    return `<article class="row"><div><div class="t"><span class="pill st-${esc(i.status)}">${esc(i.status)}</span>${name}</div><div class="m">${meta}</div></div>
+    <div class="price num">${money(t)}<small>${i.qty>1||i.fee?unit:""}${was}${i.fee?' <span class="feeflag">+20% GC fee</span>':""}</small></div>
+    ${i.notes?`<div class="notes">${esc(i.notes)}</div>`:""}</article>`}).join("")||`<p class="help">Nothing matches these filters.</p>`;
+}
+$("#filters").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.k==="s")fStatus=b.dataset.v;else fCat=b.dataset.v;render()});
+fetch("purchases.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error(r.status);return r.json()}).then(d=>{items=d;render()})
+ .catch(e=>{$("#list").innerHTML=`<div class="err">Couldn't load purchases.json (${esc(e.message)}). Open this page from GitHub Pages, not as a local file.</div>`});
+</script></body></html>
