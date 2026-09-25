@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Countertop Shortlist</title>
+<style>
+:root{--bg:#f7f5f1;--card:#fff;--ink:#1f2328;--muted:#6b6f76;--line:#e4e0d8;--accent:#1f2a44;--chip:#ece8e0;--q:#3b5b8a;--qz:#8a6a3b}
+@media (prefers-color-scheme:dark){:root{--bg:#16181c;--card:#1f2227;--ink:#ecebe8;--muted:#a0a4ab;--line:#2e3238;--accent:#c9d3e6;--chip:#2a2e34;--q:#8fb0e0;--qz:#e0bf8f}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+header{padding:20px 16px 8px;max-width:1200px;margin:auto}
+h1{margin:0 0 4px;font-size:22px}
+header p{margin:0;color:var(--muted);font-size:14px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;padding:12px 16px;max-width:1200px;margin:auto;position:sticky;top:0;background:var(--bg);z-index:2}
+.bar button{border:1px solid var(--line);background:var(--chip);color:var(--ink);padding:7px 14px;border-radius:999px;font-size:14px;cursor:pointer}
+.bar button.on{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;padding:8px 16px 32px;max-width:1200px;margin:auto}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.imgs{display:grid;grid-template-columns:2fr 1fr;gap:2px;background:var(--line);aspect-ratio:3/2}
+.imgs div{position:relative;overflow:hidden;background:var(--chip)}
+.imgs img{width:100%;height:100%;object-fit:cover;display:block;cursor:zoom-in}
+.imgs span{position:absolute;left:6px;bottom:6px;font-size:11px;background:rgba(0,0,0,.55);color:#fff;padding:2px 6px;border-radius:4px}
+.imgs .miss{display:flex;align-items:center;justify-content:center;height:100%;font-size:12px;color:var(--muted);text-align:center;padding:8px}
+.body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.name{font-weight:650;font-size:17px}
+.tag{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;padding:2px 7px;border-radius:4px;border:1px solid currentColor;white-space:nowrap}
+.tag.quartz{color:var(--q)}.tag.quartzite{color:var(--qz)}
+.meta{font-size:13px;color:var(--muted)}
+.fit{font-size:14px}
+.star{font-size:12px;font-weight:600;color:var(--qz)}
+.body a{font-size:13px;color:var(--q);margin-top:auto}
+.lb{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;z-index:9;padding:16px}
+.lb.on{display:flex}.lb img{max-width:100%;max-height:100%}
+footer{max-width:1200px;margin:auto;padding:0 16px 32px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<header>
+<h1>Countertop Shortlist</h1>
+<p>Warm-white, soft-veined options for the light-gray / navy-island / checkerboard kitchen. Tap an image to enlarge. Manufacturer photos — real slabs vary, especially quartzite.</p>
+</header>
+<div class="bar">
+<button class="on" data-f="all">All</button>
+<button data-f="quartz">Quartz</button>
+<button data-f="quartzite">Quartzite</button>
+<button data-f="best">Closest to photo</button>
+</div>
+<div class="grid" id="grid"></div>
+<footer>Quartz: no sealing, no staining, but must always use a trivet (resin scorches ~300°F). Quartzite: tolerates heat, reseal ~yearly, every slab differs — pick yours in person and test it (glass scratch + lemon).</footer>
+<div class="lb" id="lb"><img alt=""></div>
+<script>
+const items=[
+{n:"Calacatta Laza",b:"MSI Q Quartz",t:"quartz",best:1,tier:"$",tone:"Warm white",vein:"Soft gray with a hint of gold, moderate",fit:"Strong match for the photo; warmth works with brass and navy. Best value.",s:"https://cdn.msisurfaces.com/images/quartz-countertops/products/slab/large/calacatta-laza-quartz.jpg",c:"https://cdn.msisurfaces.com/images/quartz-countertops/products/closeup/large/calacatta-laza-quartz.jpg",u:"https://www.msisurfaces.com/quartz-countertops/calacatta-laza-quartz/"},
+{n:"Calacatta Miraggio",b:"MSI Q Quartz",t:"quartz",tier:"$",tone:"Bright white",vein:"Soft flowing gray",fit:"Cooler/brighter than the photo — check against your cabinet sample.",s:"https://cdn.msisurfaces.com/images/quartz-countertops/products/slab/large/calacatta-miraggio-quartz.jpg",c:"https://cdn.msisurfaces.com/images/quartz-countertops/products/closeup/large/calacatta-miraggio-quartz.jpg",u:"https://www.msisurfaces.com/quartz-countertops/calacatta-miraggio-quartz/"},
+{n:"Ethereal Glow",b:"Silestone (Cosentino)",t:"quartz",best:1,tier:"$$",tone:"Soft white",vein:"Fine gray and gold veins, low contrast",fit:"Among the calmest veined options; gold threads echo brass hardware.",s:"https://assetstools.cosentino.com/api/v1/bynder/color/MR1/tablahd/MR1-fullslab.jpg?w=1400&h=1400&q=75&auto=format",c:"https://assetstools.cosentino.com/api/v1/bynder/color/MR1/detalle/MR1-thumb.jpg?w=700&h=700&auto=compress%2Cformat",u:"https://www.cosentino.com/colors/silestone/ethereal-glow/"},
+{n:"White Attica",b:"Caesarstone 5143",t:"quartz",best:1,tier:"$$",tone:"Clean white",vein:"Fine, sparse gray",fit:"Subtle and quiet; lets the floor be the focal point.",s:"",c:"https://www.caesarstoneus.com/wp-content/uploads/2020/12/5143_White-Attica_5143_CU_275_454px_jpg.jpg",u:"https://www.caesarstoneus.com/catalog/5143-white-attica/"},
+{n:"Calacatta Nuvo",b:"Caesarstone 5131",t:"quartz",tier:"$$",tone:"Creamy white",vein:"Bolder cascading gray streaks",fit:"More contrast than the photo — look if you want a bit more drama on the island.",s:"https://www.caesarstoneus.com/wp-content/uploads/2020/12/5131_Calacatta-Nuvo_5131_Full_Slab-16X9-1.jpg",c:"https://www.caesarstoneus.com/wp-content/uploads/2020/12/5131_Calacatta-Nuvo_5131_Render_LS_8-1920X1080.jpg",u:"https://www.caesarstoneus.com/catalog/5131-calacatta-nuvo/"},
+{n:"Ella",b:"Cambria",t:"quartz",tier:"$$$",tone:"Soft white",vein:"Delicate gray",fit:"Premium, US-made; soft look close to the photo.",s:"https://shop.cambriausa.com/cdn/shop/products/Ella4000x1900_D_17V1_77622a8d-7d64-4075-abc6-fbd81cf02db8.jpg?v=1760729692&width=1214",c:"https://shop.cambriausa.com/cdn/shop/files/Ella_1440x1440_RGB_17.jpg?crop=center&height=800&v=1760729692&width=800",u:"https://www.cambriausa.com/quartz-countertops/quartz-colors/designs/ella"},
+{n:"Brittanicca Warm",b:"Cambria",t:"quartz",tier:"$$$",tone:"Warm white",vein:"Broad gray-taupe, dramatic",fit:"Bolder than the photo; premium price.",s:"https://shop.cambriausa.com/cdn/shop/files/brittanicca-warm.webp?v=1760729587&width=1214",c:"https://shop.cambriausa.com/cdn/shop/files/Brittanicca_Warm_1440x1440_RGB_17.jpg?crop=center&height=800&v=1760729587&width=800",u:"https://www.cambriausa.com/quartz-countertops/quartz-colors/designs/brittanicca-warm"},
+{n:"Taj Mahal / Perla Venata",b:"Natural quartzite (Brazil)",t:"quartzite",best:1,tier:"$$–$$$",tone:"Warm cream-white",vein:"Soft, wispy taupe-gray",fit:"Best natural-stone match; warm tone suits brass. The two names are often used for the same stone family — judge the slab, not the label.",s:"https://cdn.msisurfaces.com/images/colornames/fullslab/taj-mahal-quartzite.jpg",c:"https://cdn.msisurfaces.com/images/colornames/gradient/taj-mahal-quartzite.jpg",u:"https://www.msisurfaces.com/quartzite/taj-mahal/"},
+{n:"White Macaubas",b:"Natural quartzite (Brazil)",t:"quartzite",tier:"$$–$$$",tone:"Cool white",vein:"Linear, streaky gray",fit:"Very dense and hard (low stain risk for quartzite); busier and cooler than the photo.",s:"https://cdn.msisurfaces.com/images/colornames/fullslab/white-macaubas-quartzite.jpg",c:"https://cdn.msisurfaces.com/images/colornames/white-macaubas-quartzite.jpg",u:"https://www.msisurfaces.com/quartzite/white-macaubas/"}
+];
+const g=document.getElementById('grid'),lb=document.getElementById('lb');
+function pic(src,label){if(!src)return `<div><div class="miss">Full-slab photo on product page</div></div>`;
+return `<div><img loading="lazy" src="${src}" alt="${label}" onerror="this.parentNode.innerHTML='<div class=miss>Image blocked — open product page</div>'"><span>${label}</span></div>`}
+function render(f){g.innerHTML=items.filter(i=>f==='all'||(f==='best'?i.best:i.t===f)).map(i=>`
+<div class="card"><div class="imgs">${pic(i.s,'Slab')}${pic(i.c,'Close-up')}</div>
+<div class="body"><div class="top"><div class="name">${i.n}</div><span class="tag ${i.t}">${i.t}</span></div>
+<div class="meta">${i.b} · ${i.tier} · ${i.tone}</div>
+<div class="meta">Veining: ${i.vein}</div>
+${i.best?'<div class="star">★ Closest to your photo</div>':''}
+<div class="fit">${i.fit}</div>
+<a href="${i.u}" target="_blank" rel="noopener">Manufacturer page ↗</a></div></div>`).join('')}
+document.querySelectorAll('.bar button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.bar button').forEach(x=>x.classList.remove('on'));b.classList.add('on');render(b.dataset.f)});
+g.addEventListener('click',e=>{if(e.target.tagName==='IMG'){lb.querySelector('img').src=e.target.src;lb.classList.add('on')}});
+lb.onclick=()=>lb.classList.remove('on');
+render('all');
+</script>
+</body>
+</html>
