@@ -92,19 +92,20 @@
     "list_price": 2299
   },
   {
-    "item": "Microwave",
+    "item": "2.2 cu ft over-the-range microwave with slide-out vent",
     "category": "Appliances",
     "room": "Kitchen",
     "vendor": "",
-    "brand": "",
-    "model": "",
-    "url": "",
-    "unit_price": null,
+    "brand": "GE Profile",
+    "model": "PVM9225RYSS",
+    "url": "https://www.geappliances.com/appliance/GE-Profile-2-2-Cu-Ft-Over-the-Range-Sensor-Microwave-Oven-with-Extendable-Slide-Out-Vent-PVM9225RYSS",
+    "unit_price": 849,
     "qty": 1,
     "unit": "ea",
-    "status": "Considering",
+    "status": "Selected",
     "fee": false,
-    "notes": ""
+    "notes": "Serves as the range's exhaust, recirculating (no outside duct). 29-7/8\" W x 17-1/4\" H x 15-9/16\" D — made for a 30\" range. 400 CFM; slide-out vent extends over the front burners. DISCONTINUED by GE (clearance $619, out of stock 2026-09-25); $849 is a dealer price — confirm stock or pick the successor. Needs a recirculating charcoal filter kit (confirm part #). Cabinet above the range must be sized for an OTR microwave.",
+    "list_price": null
   },
   {
     "item": "Kitchen sink",
