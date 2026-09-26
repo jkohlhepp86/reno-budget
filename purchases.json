@@ -34,31 +34,31 @@
     "item": "Floor tile — Merzoni Checker Ruzzini 17-7/8\" porcelain",
     "category": "Tile",
     "room": "Kitchen, hall, bath, mud room",
-    "vendor": "",
+    "vendor": "Home Depot",
     "brand": "Merola",
-    "model": "Merzoni Checker Ruzzini",
-    "url": "",
-    "unit_price": 11.57,
-    "qty": 550,
-    "unit": "sf",
+    "model": "FPE18RUZ",
+    "url": "https://www.homedepot.com/p/Merola-Tile-Merzoni-Checker-Ruzzini-17-7-8-in-x-17-7-8-in-Porcelain-Floor-and-Wall-Tile-13-5-sq-ft-Case-FPE18RUZ/309890426",
+    "unit_price": 156.23,
+    "qty": 41,
+    "unit": "case",
     "status": "Selected",
     "fee": false,
-    "notes": "~550 sq ft across all spaces. Confirm overage (typically +10%) before ordering."
+    "notes": "13.5 sq ft/case ($11.57/sq ft, Home Depot 2026-09-26). 41 cases = 553.5 sq ft for the ~550 sq ft across kitchen, hall, bath and mud room. With a typical 10% overage it's 45 cases ($7,030) — confirm with the tile installer before ordering."
   },
   {
     "item": "Backsplash — Whisper White 3x6 glossy ceramic",
     "category": "Tile",
     "room": "Kitchen",
-    "vendor": "",
+    "vendor": "Home Depot",
     "brand": "MSI",
-    "model": "Whisper White handcrafted 3x6",
-    "url": "",
-    "unit_price": null,
+    "model": "PT-WW36",
+    "url": "https://www.homedepot.com/p/MSI-Whisper-White-Glossy-White-Ceramic-Subway-Tile-3-in-x-6-in-Wall-1-sq-ft-Case-PT-WW36/204688439",
+    "unit_price": 12.69,
     "qty": 50,
-    "unit": "sf",
+    "unit": "case",
     "status": "Selected",
     "fee": false,
-    "notes": "~45–50 sq ft. Price TBD."
+    "notes": "1 sq ft/case ($12.69/sq ft, Home Depot 2026-09-26). 50 cases for ~45–50 sq ft; handmade-look tile varies, so order ~10% extra (55 cases, $698)."
   },
   {
     "item": "Countertops",
@@ -73,7 +73,7 @@
     "unit": "sf",
     "status": "Considering",
     "fee": false,
-    "notes": "Quartz vs. quartzite — see countertop lookbook. ~57 sq ft from the cabinet drawings (perimeter ~38, island ~19). Material has no GC fee; fabrication/install labor may."
+    "notes": "Quartz vs. quartzite — see countertop lookbook. ~57 sq ft from the cabinet drawings (perimeter ~38, island ~19); mud room top tracked separately. Material has no GC fee; fabrication/install labor may."
   },
   {
     "item": "24.7 cu ft French-door refrigerator",
@@ -92,19 +92,19 @@
     "list_price": 2299
   },
   {
-    "item": "Microwave",
+    "item": "2.2 cu ft over-the-range microwave with slide-out vent",
     "category": "Appliances",
     "room": "Kitchen",
     "vendor": "",
-    "brand": "",
-    "model": "",
-    "url": "",
-    "unit_price": null,
+    "brand": "GE Profile",
+    "model": "PVM9225RYSS",
+    "url": "https://www.geappliances.com/appliance/GE-Profile-2-2-Cu-Ft-Over-the-Range-Sensor-Microwave-Oven-with-Extendable-Slide-Out-Vent-PVM9225RYSS",
+    "unit_price": 849,
     "qty": 1,
     "unit": "ea",
-    "status": "Considering",
+    "status": "Selected",
     "fee": false,
-    "notes": ""
+    "notes": "Serves as the range's exhaust, recirculating (no outside duct). 29-7/8\" W x 17-1/4\" H x 15-9/16\" D. 400 CFM; slide-out vent extends over the front burners. DISCONTINUED by GE (clearance $619, out of stock 2026-09-25); $849 is a dealer price — confirm stock or pick the successor. Needs a recirculating charcoal filter kit (confirm part #). Cabinet drawings show a 20\" opening; the microwave is 17-1/4\" tall (see cabinet plan)."
   },
   {
     "item": "Dishwasher (existing — reusing)",
@@ -137,18 +137,18 @@
     "notes": "Undermount; fabricator needs the template/model before cutting."
   },
   {
-    "item": "Laundry countertop (existing granite — reusing)",
+    "item": "Mud room countertop (new, matching kitchen)",
     "category": "Countertops",
     "room": "Mud room",
     "vendor": "",
     "brand": "",
     "model": "",
     "url": "cabinets.html",
-    "unit_price": 0,
-    "qty": 1,
-    "unit": "ea",
-    "status": "Selected",
+    "unit_price": null,
+    "qty": 5,
+    "unit": "sf",
+    "status": "Considering",
     "fee": false,
-    "notes": "Reinstalled on the new 29″-wide sink base. Risk: granite can crack at the sink cutout when removed — keep a remnant as backup."
+    "notes": "Replacing the existing granite with the kitchen material. ~5 sq ft over the 29″-wide × 21″-deep sink base, plus a sink cutout. Small enough to come from the kitchen slab's offcuts — ask the fabricator to include it in the kitchen template."
   }
 ]
