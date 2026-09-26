@@ -1,0 +1,62 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kitchen Mockups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"}}</script>
+<style>
+:root{--ground:#f3f5f4;--panel:#fff;--ink:#1c2628;--muted:#5d6b6c;--line:#d5dcdb;--accent:#2c6e68;--accent-soft:#dcebe8;
+--display:"Barlow Condensed","Arial Narrow",sans-serif;--body:"IBM Plex Sans",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ground:#121a1b;--panel:#1a2426;--ink:#e3eae9;--muted:#95a3a3;--line:#2e3b3d;--accent:#6fb8ae;--accent-soft:#1f3634}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5}
+.wrap{max-width:1000px;margin:0 auto;padding:24px 16px 64px;display:flex;flex-direction:column;gap:24px}
+a{color:var(--accent)}
+h1{font-family:var(--display);font-weight:600;font-size:2.3rem;line-height:1.05;margin:0}
+h2{font-family:var(--display);font-weight:600;font-size:1.3rem;text-transform:uppercase;letter-spacing:.05em;margin:0 0 10px}
+.sub{color:var(--muted);margin:6px 0 0}
+figure{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+figure img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;background:var(--line);cursor:zoom-in}
+figcaption{padding:10px 14px;font-size:.9rem;color:var(--muted)}
+figcaption b{color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.note{color:var(--muted);font-size:.88rem}
+button{font:inherit;border:1px solid var(--accent);background:var(--accent);color:#fff;padding:8px 16px;border-radius:6px;cursor:pointer}
+#explore canvas{display:block;width:100%;border-radius:6px;touch-action:none}
+.lb{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;z-index:9;padding:12px}
+.lb.on{display:flex}.lb img{max-width:100%;max-height:100%}
+</style></head><body><div class="wrap">
+<div><a href="./">← Renovation home</a></div>
+<header><h1>Kitchen Mockups</h1>
+<p class="sub">The original AI inspiration image, and to-scale 3D renders built from the cabinet maker's drawings and photos of the actual room. Tap an image to enlarge.</p></header>
+
+<section><h2>Inspiration (AI-generated)</h2>
+<figure><img src="inspiration.webp" alt="AI-generated inspiration kitchen"><figcaption><b>The look we're going for:</b> light gray Shaker cabinets, navy island, warm white veined counters, white handmade subway tile, brass hardware and glass pendants, black-and-white checkerboard floor. The layout is not to scale: the real room is tighter, the fridge sits back in a wall recess, and the island seats 3, not 4.</figcaption></figure>
+</section>
+
+<section><h2>To-scale renders</h2>
+<div class="grid">
+<figure><img data-view="entry" alt="Render from the doorway side"><figcaption><b>From the doorway side.</b> Sink wall with the tall window, island with 3 stools, porch window on the right.</figcaption></figure>
+<figure><img data-view="range" alt="Render of the fridge and range wall"><figcaption><b>Fridge &amp; range wall.</b> Fridge recessed flush beside the living-room doorway; microwave over the range.</figcaption></figure>
+<figure><img data-view="main" alt="Render from the island end"><figcaption><b>From the island end.</b> Same angle as the inspiration image.</figcaption></figure>
+</div>
+<p class="note">Rendered live in your browser from the same measurements. Cabinets, appliances, island and pendant positions follow the cabinet drawings and product specs; room depth (~15½ ft) and door/window positions are estimated from photos. Finishes are simplified.</p>
+</section>
+
+<section><h2>Explore in 3D</h2>
+<div id="explore"><button id="go" type="button">Open the 3D model</button></div>
+<p class="note">Drag to look around, pinch or scroll to zoom.</p>
+</section>
+</div>
+<div class="lb" id="lb"><img alt=""></div>
+<script type="module">
+const lb = document.getElementById('lb');
+document.addEventListener('click', e => { const i = e.target.closest('figure img'); if (i && i.src) { lb.querySelector('img').src = i.src; lb.classList.add('on'); } });
+lb.addEventListener('click', () => lb.classList.remove('on'));
+await import('./mockup-scene.js');
+for (const img of document.querySelectorAll('img[data-view]')) {
+  await new Promise(r => requestAnimationFrame(r));
+  img.src = window.renderView(img.dataset.view);
+}
+document.getElementById('go').addEventListener('click', e => { e.target.remove(); window.explore(document.getElementById('explore')); });
+</script>
+</body></html>

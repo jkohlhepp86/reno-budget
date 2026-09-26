@@ -39,11 +39,11 @@
     "model": "FPE18RUZ",
     "url": "https://www.homedepot.com/p/Merola-Tile-Merzoni-Checker-Ruzzini-17-7-8-in-x-17-7-8-in-Porcelain-Floor-and-Wall-Tile-13-5-sq-ft-Case-FPE18RUZ/309890426",
     "unit_price": 156.23,
-    "qty": 41,
+    "qty": 37,
     "unit": "case",
     "status": "Selected",
     "fee": false,
-    "notes": "13.5 sq ft/case ($11.57/sq ft, Home Depot 2026-09-26). 41 cases = 553.5 sq ft for the ~550 sq ft across kitchen, hall, bath and mud room. With a typical 10% overage it's 45 cases ($7,030) — confirm with the tile installer before ordering."
+    "notes": "13.5 sq ft/case ($11.57/sq ft, Home Depot 2026-09-26). 37 cases = 499.5 sq ft: the budget's measured 434 sq ft (kitchen 182, hall 28, bath 32, mud room 192) plus 12% overage, rounded up to whole cases. Confirm the count with the tile installer before ordering."
   },
   {
     "item": "Backsplash — Whisper White 3x6 glossy ceramic",
@@ -54,11 +54,11 @@
     "model": "PT-WW36",
     "url": "https://www.homedepot.com/p/MSI-Whisper-White-Glossy-White-Ceramic-Subway-Tile-3-in-x-6-in-Wall-1-sq-ft-Case-PT-WW36/204688439",
     "unit_price": 12.69,
-    "qty": 50,
+    "qty": 55,
     "unit": "case",
     "status": "Selected",
     "fee": false,
-    "notes": "1 sq ft/case ($12.69/sq ft, Home Depot 2026-09-26). 50 cases for ~45–50 sq ft; handmade-look tile varies, so order ~10% extra (55 cases, $698)."
+    "notes": "1 sq ft/case ($12.69/sq ft, Home Depot 2026-09-26). 55 cases = ~50 sq ft plus 10% overage (handmade-look tile varies piece to piece)."
   },
   {
     "item": "Countertops",
@@ -73,7 +73,7 @@
     "unit": "sf",
     "status": "Considering",
     "fee": false,
-    "notes": "Quartz vs. quartzite — see countertop lookbook. ~57 sq ft from the cabinet drawings (perimeter ~38, island ~19); mud room top tracked separately. Material has no GC fee; fabrication/install labor may."
+    "notes": "Quartz vs. quartzite — see countertop lookbook. ~57 sq ft from the cabinet drawings (perimeter ~38, island ~19); mud room top tracked separately. Budget assumes ~$60/sq ft material + $30/sq ft fabrication. Material has no GC fee; fabrication/install labor may."
   },
   {
     "item": "24.7 cu ft French-door refrigerator",
@@ -134,7 +134,37 @@
     "unit": "ea",
     "status": "Considering",
     "fee": false,
-    "notes": "Undermount; fabricator needs the template/model before cutting."
+    "notes": "Undermount; fabricator needs the model/template before cutting. Budget placeholder $500."
+  },
+  {
+    "item": "Kitchen faucet (brass)",
+    "category": "Fixtures",
+    "room": "Kitchen",
+    "vendor": "",
+    "brand": "",
+    "model": "",
+    "url": "",
+    "unit_price": null,
+    "qty": 1,
+    "unit": "ea",
+    "status": "Considering",
+    "fee": false,
+    "notes": "Brass to match the pendants and hardware. Budget placeholder $400."
+  },
+  {
+    "item": "Garbage disposal",
+    "category": "Appliances",
+    "room": "Kitchen",
+    "vendor": "",
+    "brand": "",
+    "model": "",
+    "url": "",
+    "unit_price": null,
+    "qty": 1,
+    "unit": "ea",
+    "status": "Considering",
+    "fee": false,
+    "notes": "Budget placeholder $250."
   },
   {
     "item": "Mud room countertop (new, matching kitchen)",
