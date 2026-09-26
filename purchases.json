@@ -22,13 +22,13 @@
     "vendor": "",
     "brand": "",
     "model": "",
-    "url": "",
+    "url": "cabinets.html",
     "unit_price": 25000,
     "qty": 1,
     "unit": "ls",
     "status": "Selected",
     "fee": false,
-    "notes": "Light gray perimeter, navy island. Own installer; outside the GC fee."
+    "notes": "Light gray perimeter, navy island. Own installer; outside the GC fee. Drawings also include the laundry/mud room cabinets — confirm they're in this price."
   },
   {
     "item": "Floor tile — Merzoni Checker Ruzzini 17-7/8\" porcelain",
@@ -69,11 +69,11 @@
     "model": "",
     "url": "countertops.html",
     "unit_price": null,
-    "qty": 70,
+    "qty": 57,
     "unit": "sf",
     "status": "Considering",
     "fee": false,
-    "notes": "Quartz vs. quartzite — see countertop lookbook. ~70 sq ft incl. island. Material has no GC fee; fabrication/install labor may."
+    "notes": "Quartz vs. quartzite — see countertop lookbook. ~57 sq ft from the cabinet drawings (perimeter ~38, island ~19). Material has no GC fee; fabrication/install labor may."
   },
   {
     "item": "24.7 cu ft French-door refrigerator",
@@ -135,5 +135,20 @@
     "status": "Considering",
     "fee": false,
     "notes": "Undermount; fabricator needs the template/model before cutting."
+  },
+  {
+    "item": "Laundry countertop (existing granite — reusing)",
+    "category": "Countertops",
+    "room": "Mud room",
+    "vendor": "",
+    "brand": "",
+    "model": "",
+    "url": "cabinets.html",
+    "unit_price": 0,
+    "qty": 1,
+    "unit": "ea",
+    "status": "Selected",
+    "fee": false,
+    "notes": "Reinstalled on the new 29″-wide sink base. Risk: granite can crack at the sink cutout when removed — keep a remnant as backup."
   }
 ]

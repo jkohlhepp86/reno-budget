@@ -1,0 +1,96 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cabinet Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--ground:#f3f5f4;--panel:#fff;--ink:#1c2628;--muted:#5d6b6c;--line:#d5dcdb;--accent:#2c6e68;--accent-soft:#dcebe8;--fee:#a8621b;--fee-soft:#f6e8d8;
+--display:"Barlow Condensed","Arial Narrow",sans-serif;--body:"IBM Plex Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ground:#121a1b;--panel:#1a2426;--ink:#e3eae9;--muted:#95a3a3;--line:#2e3b3d;--accent:#6fb8ae;--accent-soft:#1f3634;--fee:#e0a15c;--fee-soft:#3a2c1c}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5}
+.wrap{max-width:1000px;margin:0 auto;padding:24px 16px 64px;display:flex;flex-direction:column;gap:24px}
+a{color:var(--accent)}
+h1{font-family:var(--display);font-weight:600;font-size:2.3rem;line-height:1.05;margin:0}
+h2{font-family:var(--display);font-weight:600;font-size:1.3rem;text-transform:uppercase;letter-spacing:.05em;margin:0 0 10px}
+.sub{color:var(--muted);margin:6px 0 0}
+.sheets{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+figure{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+figure img{display:block;width:100%;height:auto;background:#fff;cursor:zoom-in}
+figcaption{padding:8px 12px;font-size:.88rem;color:var(--muted)}
+figcaption b{color:var(--ink)}
+.issues{display:flex;flex-direction:column;gap:10px}
+.issue{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--fee);border-radius:6px;padding:12px 16px}
+.issue.ok{border-left-color:var(--accent)}
+.issue h3{margin:0 0 4px;font-size:1rem}
+.issue p{margin:4px 0}
+.tag{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;padding:2px 7px;border-radius:4px;background:var(--fee-soft);color:var(--fee);margin-left:6px;vertical-align:2px}
+.ok .tag{background:var(--accent-soft);color:var(--accent)}
+.num{font-family:var(--mono);font-size:.92em}
+table{border-collapse:collapse;width:100%;background:var(--panel);border:1px solid var(--line);border-radius:6px;font-size:.9rem}
+td,th{padding:6px 10px;border-bottom:1px solid var(--line);text-align:left}
+th{font-size:.72rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+td.r,th.r{text-align:right}
+.lb{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;align-items:flex-start;justify-content:center;overflow:auto;z-index:9;padding:16px}
+.lb.on{display:flex}.lb img{max-width:none;width:min(1105px,200%);background:#fff}
+.note{color:var(--muted);font-size:.85rem}
+</style></head><body><div class="wrap">
+<div><a href="./">← Renovation home</a></div>
+<header>
+<h1>Cabinet Plan</h1>
+<p class="sub">Drawings from the cabinet maker (revision dated 5/27/26, sent July 2026): floor plan, wall elevations, island, fridge panel and the laundry/mud room cabinets. Tap a sheet to see it full size. <a href="cabinet-drawings.pdf">Download the drawings (PDF)</a>.</p>
+</header>
+
+<section class="sheets">
+<figure><img src="cabinet-sheet-1.png" alt="Kitchen floor plan with laundry"><figcaption><b>Sheet 1 — Floor plan.</b> L-shaped perimeter, 72″ island, fridge in a recess next to the door trim, laundry below.</figcaption></figure>
+<figure><img src="cabinet-sheet-2.png" alt="Kitchen wall elevations"><figcaption><b>Sheet 2 — Elevations.</b> Fridge/range/microwave wall (top) and sink/window wall (bottom).</figcaption></figure>
+<figure><img src="cabinet-sheet-3.png" alt="Island, fridge side panel and laundry elevations"><figcaption><b>Sheet 3 — Island, fridge panel, laundry.</b> Island front/back/side, 103½″ fridge side panel, laundry wall cabinet and sink base.</figcaption></figure>
+</section>
+
+<section>
+<h2>To confirm with the cabinet maker</h2>
+<div class="issues">
+<div class="issue"><h3>Fridge opening vs. the GE we bought <span class="tag">Check</span></h3>
+<p>The drawings were made for the LG LF25H6330S. We bought the GE GNE25JYKFS instead.</p>
+<p><b>Width:</b> 32¾″ fridge in a 34″ opening. Fine: GE asks for ⅛″ per side.</p>
+<p><b>Height:</b> the opening is 71″. The GE is 69⅞″ to the top of the doors and needs 1″ of air above it, so it needs 70⅞″. That leaves only ⅛″ to spare. If the 71″ is measured from today's floor and the new tile (about ½″ with mortar) runs under the fridge, it won't fit with the required clearance.</p>
+<p><b>Door swing:</b> the fridge sits between a 38¼″-deep side panel and the base-cabinet run. With the required 2″ gap behind it, the GE door fronts land about 37″ from the back wall, so the panel sticks out past the doors. GE lists the fridge as 40⅞″ wide with both doors open 90°, which means each door swings about 4″ past the side of the fridge. With only about ⅝″ of gap, a panel that sticks out past the door face can keep the doors from opening fully, and the crisper drawers need the doors open fully to slide out. The cabinet maker's own note asks us to double-check the fridge area; this is likely why.</p></div>
+
+<div class="issue"><h3>Microwave opening height <span class="tag">Check</span></h3>
+<p>The opening is drawn 30″ wide × 20″ tall. The GE Profile PVM9225 is 29⅞″ × 17¼″ and hangs from the cabinet above it. With a 20″ opening, its bottom sits about 2¾″ higher than the bottoms of the neighboring upper cabinets: roughly 57″ off the floor and 21″ above the cooktop.</p>
+<p>Dropping the cabinet above to about 71¼″ off the floor lines the microwave up with the other uppers at 54″. That still leaves 35″ between the cooktop and the cabinet (GE's minimum is 30″). Lower also means better capture of steam and smoke.</p></div>
+
+<div class="issue"><h3>Island seating <span class="tag">Decide</span></h3>
+<p>The top is 74″ × 37½″ over 72″ × 24″ cabinets, which leaves about 12″ of overhang for knees. That's the minimum for counter-height stools (15″ is typical), and 74″ seats 3 stools at 24″ spacing, not the 4 in the inspiration photo. A 12″ overhang is also near the limit for unsupported 3 cm stone. Ask the countertop fabricator whether hidden steel supports are needed.</p></div>
+
+<div class="issue"><h3>Walkway widths <span class="tag">Check</span></h3>
+<p>The drawings don't show the distance from the island to each cabinet run. Confirm at least 42″ (48″ if two people cook at once), measured from countertop edges and handles, not cabinet boxes.</p></div>
+
+<div class="issue"><h3>Laundry / mud room <span class="tag">Check</span></h3>
+<p>The drawings show a 56″ × 31½″ × 13″-deep wall cabinet and a 29″-wide × 21″-deep sink base, the same footprint as today. To reuse the existing granite, the new base has to match the old height (34½″ box) and depth.</p>
+<p>Granite most often cracks at the sink cutout when it's pulled up, especially if there's an undermount sink epoxied to it. Have a backup plan, such as a remnant piece.</p>
+<p>The heated-floor mat should stop at the cabinet footprint, not run under the cabinets.</p></div>
+
+<div class="issue ok"><h3>Things that line up <span class="tag">OK</span></h3>
+<p>Sink base (36″) is centered on the window: the centerline is 65¾″ from the end of the run in both the plan and the elevation. Dishwasher opening is 24″, next to the sink. Range opening is 30″ for the slide-in, with a tray pullout and a utensil pullout on either side. The microwave spot is directly above the range. Upper cabinets are 49½″ tall with 2″ of crown molding to the 105½″ ceiling.</p></div>
+</div>
+</section>
+
+<section>
+<h2>Countertop area from the drawings</h2>
+<table>
+<tr><th>Run</th><th>Size</th><th class="r">Sq ft</th></tr>
+<tr><td>Sink/window wall</td><td class="num">153½″ × 25½″</td><td class="r num">27.2</td></tr>
+<tr><td>Range wall (excluding the corner and the 30″ range)</td><td class="num">58½″ × 25½″</td><td class="r num">10.4</td></tr>
+<tr><td>Island</td><td class="num">74″ × 37½″</td><td class="r num">19.3</td></tr>
+<tr><td><b>Total</b></td><td></td><td class="r num"><b>≈ 57</b></td></tr>
+</table>
+<p class="note">Assumes 24″ base cabinets with a 1½″ countertop overhang, and a tiled backsplash (no stone backsplash). The fabricator's template sets the final numbers.</p>
+</section>
+</div>
+<div class="lb" id="lb"><img alt=""></div>
+<script>
+const lb=document.getElementById('lb');
+document.querySelectorAll('figure img').forEach(i=>i.addEventListener('click',()=>{lb.querySelector('img').src=i.src;lb.classList.add('on')}));
+lb.addEventListener('click',()=>lb.classList.remove('on'));
+</script>
+</body></html>
