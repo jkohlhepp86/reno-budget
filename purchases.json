@@ -150,5 +150,35 @@
     "status": "Considering",
     "fee": false,
     "notes": "Replacing the existing granite with the kitchen material. ~5 sq ft over the 29″-wide × 21″-deep sink base, plus a sink cutout. Small enough to come from the kitchen slab's offcuts — ask the fabricator to include it in the kitchen template."
+  },
+  {
+    "item": "Bridget recycled glass pendant, 14\" (over sink)",
+    "category": "Lighting",
+    "room": "Kitchen",
+    "vendor": "Pottery Barn",
+    "brand": "Pottery Barn",
+    "model": "Bridget 14\" — SKU 823234",
+    "url": "https://www.potterybarn.com/products/bridget-recycled-glass-pendant/?sku=823234",
+    "unit_price": 349,
+    "qty": 1,
+    "unit": "ea",
+    "status": "Installed",
+    "fee": false,
+    "notes": "Pottery Barn calls the 14\" size \"Small\". Price is the current listed price (2026-09-26); update if you paid something different."
+  },
+  {
+    "item": "Bridget recycled glass pendant, 17\" (over island)",
+    "category": "Lighting",
+    "room": "Kitchen",
+    "vendor": "Pottery Barn",
+    "brand": "Pottery Barn",
+    "model": "Bridget 17\" — SKU 3177705",
+    "url": "https://www.potterybarn.com/products/bridget-recycled-glass-pendant/?sku=3177705",
+    "unit_price": 449,
+    "qty": 2,
+    "unit": "ea",
+    "status": "Selected",
+    "fee": false,
+    "notes": "Large size, same finish as the sink pendant. On the 74\" island, centering each at the quarter points (about 18½\" in from each end) leaves 20\" between shades and about 10\" of overhang room at the ends; hang the bottoms 30–36\" above the counter. Electrician needs two ceiling boxes at those spots."
   }
 ]
