@@ -122,19 +122,19 @@
     "notes": "Keeping the current LG. Cabinet maker has seen it and planned the opening around it."
   },
   {
-    "item": "Kitchen sink — 33″ white farmhouse (apron-front)",
+    "item": "Kitchen sink — Kohler 33″ white farmhouse (Whitehaven or Dickinson)",
     "category": "Fixtures",
     "room": "Kitchen",
-    "vendor": "",
-    "brand": "",
-    "model": "",
-    "url": "",
-    "unit_price": null,
+    "vendor": "Kohler",
+    "brand": "Kohler",
+    "model": "Whitehaven K-5827-0 or Dickinson K-6546-0",
+    "url": "https://www.kohler.com/en/products/kitchen-sinks/shop-kitchen-sinks/whitehaven-32-3-4-undermount-single-bowl-farmhouse-kitchen-sink-5827?skuId=5827-0",
+    "unit_price": 1238.96,
     "qty": 1,
     "unit": "ea",
     "status": "Considering",
     "fee": false,
-    "notes": "Style decided: 33″ single-bowl white fireclay apron-front, about 18–19″ front to back and ~10″ deep. Needs an apron-front sink base (36″ in the drawings). Buy it before the cabinet maker finishes that base and before countertop templating; fireclay sizes vary about ¼″. Budget placeholder $800."
+    "notes": "Enameled cast iron, white. Whitehaven K-5827-0 ($1,238.96): 32-11/16″ × 21-9/16″ overall, bowl 27¾″ × 18-1/16″ × 8-13/16″ deep, fits a 33″+ apron base. Dickinson K-6546-0 ($1,209.99): 33″ × 19-9/16″ overall, bowl 29½″ × 15⅜″ × 8⅝″ deep, needs a 36″ apron base. Both fit the 36″ sink base; buy before the cabinet maker builds it and before countertop templating. Price shown is the Whitehaven."
   },
   {
     "item": "Kitchen faucet (brass)",

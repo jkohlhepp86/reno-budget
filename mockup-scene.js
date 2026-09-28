@@ -309,7 +309,7 @@ upperCab(sinkRun, 0, 24, 54, 49.5); upperCab(sinkRun, 24, 43, 54, 49.5); upperCa
 crown(sinkRun, 0, 67, 12); crown(sinkRun, 108.5, 45, 12);
 box(41.5, 2, 13.2, M.cab, 87.75, 104.5, 6.6, sinkRun); // valance/crown over window
 
-// counter sink wall around a 33" white fireclay apron-front (farmhouse) sink
+// counter sink wall around a 33" white cast-iron apron-front (farmhouse) sink
 const SX = 87.75, SW = 33, SB = 5.5, SF = 24.5, SY0 = 24.5, SY1 = 34.5, T = 1.25; // outside: 33 wide x 19 deep x 10 tall
 function slab(x0, x1, z0, z1) { const w = x1 - x0, d = z1 - z0; const m = box(w, 1.5, d, M.counter.clone(), x0 + w / 2, 35.25, z0 + d / 2); m.material.map = counterTex.clone(); m.material.map.needsUpdate = true; m.material.map.repeat.set(w / 90, d / 90); }
 slab(0, SX - SW / 2, 0, 25.5); slab(SX + SW / 2, 153.5, 0, 25.5);
