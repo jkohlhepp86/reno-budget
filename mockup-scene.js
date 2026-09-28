@@ -298,7 +298,7 @@ splash(30, 71.25 - 54, 0.3, 54 + (71.25 - 54) / 2, 139.5 - 78.5, Math.PI / 2);
 const sinkRun = new THREE.Group(); scene.add(sinkRun);
 baseCab(sinkRun, 0, 36, [{ h: 'rest', cols: 1, type: 'door' }]);                      // corner lazy susan
 baseCab(sinkRun, 36, 33.75, [{ h: 5, cols: 1, type: 'drawer' }, { h: 'rest', cols: 2, type: 'door' }]);
-baseCab(sinkRun, 69.75, 36, [{ h: 5, cols: 1, type: 'false' }, { h: 'rest', cols: 2, type: 'door' }]);
+baseCab(sinkRun, 69.75, 36, [{ h: 10, cols: 1, type: 'false' }, { h: 'rest', cols: 2, type: 'door' }]); // apron-front sink base
 // dishwasher (stainless)
 box(23.6, 30.2, 1.5, M.steel, 117.75, 4 + 15.1, 23.5, sinkRun); box(23.6, 3.2, 1.6, M.steelDark, 117.75, 32.6, 23.6, sinkRun);
 pull(sinkRun, 117.75, 31, 24.2, 16);
@@ -309,14 +309,21 @@ upperCab(sinkRun, 0, 24, 54, 49.5); upperCab(sinkRun, 24, 43, 54, 49.5); upperCa
 crown(sinkRun, 0, 67, 12); crown(sinkRun, 108.5, 45, 12);
 box(41.5, 2, 13.2, M.cab, 87.75, 104.5, 6.6, sinkRun); // valance/crown over window
 
-// counter sink wall (with undermount sink cutout)
-const SX = 87.75, SW = 30, SD = 17, SZ = 13;
+// counter sink wall around a 33" white fireclay apron-front (farmhouse) sink
+const SX = 87.75, SW = 33, SB = 5.5, SF = 24.5, SY0 = 24.5, SY1 = 34.5, T = 1.25; // outside: 33 wide x 19 deep x 10 tall
 function slab(x0, x1, z0, z1) { const w = x1 - x0, d = z1 - z0; const m = box(w, 1.5, d, M.counter.clone(), x0 + w / 2, 35.25, z0 + d / 2); m.material.map = counterTex.clone(); m.material.map.needsUpdate = true; m.material.map.repeat.set(w / 90, d / 90); }
 slab(0, SX - SW / 2, 0, 25.5); slab(SX + SW / 2, 153.5, 0, 25.5);
-slab(SX - SW / 2, SX + SW / 2, 0, SZ - SD / 2); slab(SX - SW / 2, SX + SW / 2, SZ + SD / 2, 25.5);
-// sink bowl
-box(SW, 0.3, SD, M.sinkSteel, SX, 27, SZ); box(SW, 9, 0.3, M.sinkSteel, SX, 31, SZ - SD / 2); box(SW, 9, 0.3, M.sinkSteel, SX, 31, SZ + SD / 2);
-box(0.3, 9, SD, M.sinkSteel, SX - SW / 2, 31, SZ); box(0.3, 9, SD, M.sinkSteel, SX + SW / 2, 31, SZ);
+slab(SX - SW / 2, SX + SW / 2, 0, SB);
+{
+  const fc = new THREE.MeshStandardMaterial({ color: 0xf6f5f1, roughness: 0.12, metalness: 0 });
+  const H = SY1 - SY0, D = SF - SB;
+  box(SW, T, D, fc, SX, SY0 + T / 2, SB + D / 2);                    // floor of the bowl
+  box(SW, H, T, fc, SX, SY0 + H / 2, SF - T / 2);                    // apron (front)
+  box(SW, H, T, fc, SX, SY0 + H / 2, SB + T / 2);                    // back wall
+  box(T, H, D, fc, SX - SW / 2 + T / 2, SY0 + H / 2, SB + D / 2);    // sides
+  box(T, H, D, fc, SX + SW / 2 - T / 2, SY0 + H / 2, SB + D / 2);
+  box(3.5, 0.2, 3.5, M.sinkSteel, SX, SY0 + T + 0.1, SB + D / 2 + 3); // drain (rear-offset look)
+}
 // faucet (brass gooseneck)
 {
   const f = new THREE.Group(); scene.add(f);
