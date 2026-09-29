@@ -137,34 +137,34 @@
     "notes": "Enameled cast iron, white. 32-11/16″ × 21-9/16″ overall, 9-5/8″ tall; bowl 27¾″ × 18-1/16″ × 8-13/16″ deep; offset 3-5/8″ drain; Self-Trimming apron overlaps the cabinet face. Fits a 33″+ apron base (ours is 36″); spec sheet wants ≥9″ from cabinet top to top of door. Because the apron sits in front of the 24″ cabinet face, roughly 5–6″ of stone remains between the backsplash and the back of the bowl; enough for a single-hole faucet (confirm with the fabricator). Buy before the cabinet maker builds the base and before countertop templating. (Runner-up: Dickinson K-6546-0, $1,209.99.)"
   },
   {
-    "item": "Kitchen faucet — Kohler Crue pull-down, brushed brass",
+    "item": "Kitchen faucet — Kohler Edalyn bridge with side sprayer, brushed brass",
     "category": "Fixtures",
     "room": "Kitchen",
-    "vendor": "Home Depot",
+    "vendor": "Kohler",
     "brand": "Kohler",
-    "model": "Crue K-22972-2MB (Vibrant Brushed Moderne Brass)",
-    "url": "https://www.kohler.com/en/products/kitchen-faucets/shop-kitchen-faucets/crue-pull-down-kitchen-sink-faucet-w-three-function-sprayhead-22972?skuId=22972-2MB",
-    "unit_price": 625.31,
+    "model": "Edalyn by Studio McGee K-28356-2MB (Vibrant Brushed Moderne Brass)",
+    "url": "https://www.kohler.com/en/products/kitchen-faucets/shop-kitchen-faucets/edalyn-by-studio-mcgee-two-hole-bridge-kitchen-sink-faucet-with-side-sprayer-28356?skuId=28356-2MB",
+    "unit_price": 656.25,
     "qty": 1,
     "unit": "ea",
     "status": "Selected",
     "fee": false,
-    "notes": "Single-hole (deck plate included for 3-hole; not needed). 17-3/16″ tall, 8-9/16″ reach, 2½″ base, 1-5/16″ hole, 1.5 gpm, side lever. Fits the ~5–6″ of stone behind the Whitehaven bowl. Check the lever swing against the window sill/trim. Price is Home Depot 2026-09-28 ($625.31); confirm before ordering."
+    "notes": "Two-hole bridge on 8″ centers (1-1/4″ holes, 2-7/16″ escutcheons) plus a separate side-sprayer hole (1-1/16″); 9-3/16″ reach; lever handles; 1.5 gpm. Holes all sit on one line behind the Whitehaven bowl, within the ~5–6″ of stone. Check that the levers can rotate fully without hitting the backsplash tile. Price is Kohler.com 2026-09-29. Replaces the Crue pull-down."
   },
   {
-    "item": "Soap dispenser — Kohler Contemporary, brushed brass",
+    "item": "Soap dispenser — Kohler Traditional, brushed brass",
     "category": "Fixtures",
     "room": "Kitchen",
     "vendor": "Home Depot",
     "brand": "Kohler",
-    "model": "K-1895-C-2MB (Vibrant Brushed Moderne Brass)",
-    "url": "https://www.kohler.com/en/products/kitchen-accessories/shop-kitchen-accessories/contemporary-design-soap-lotion-dispenser-1895-c?skuId=1895-C-2MB",
-    "unit_price": 97.87,
+    "model": "K-1894-C-2MB (Vibrant Brushed Moderne Brass)",
+    "url": "https://www.kohler.com/en/products/kitchen-accessories/shop-kitchen-accessories/traditional-design-soap-lotion-dispenser-1894-c?skuId=1894-C-2MB",
+    "unit_price": 103.31,
     "qty": 1,
     "unit": "ea",
     "status": "Selected",
     "fee": false,
-    "notes": "Deck-mount, 16 oz, refills from above. 1-1/16″ hole, 2″ flange, 3-7/16″ reach, fits decks up to 2″. The fabricator drills it next to the faucet hole; place both holes as close to the sink cutout as the fabricator allows so the short pump spout dispenses over the bowl. Price is Home Depot 2026-09-28."
+    "notes": "Deck-mount, 16 oz, refills from above. 1-1/16″ hole, 2″ base, fits decks up to 2½″. Drill as close to the sink cutout as the fabricator allows so it dispenses over the bowl. Price is Home Depot 2026-09-29. Replaces the Contemporary K-1895-C."
   },
   {
     "item": "Garbage disposal (existing — reusing)",
@@ -329,7 +329,7 @@
     "unit": "ea",
     "status": "Considering",
     "fee": false,
-    "notes": "Ask the plumber whether an air gap is required or a high loop is enough. An air gap needs another hole in the ~5–6″ of stone behind the sink."
+    "notes": "Ask the plumber whether code requires an air gap or a high loop is enough. The faucet, sprayer and soap already need four holes behind the sink, so a fifth hole for an air gap would be tight; prefer a high loop if allowed."
   },
   {
     "item": "Range power cord (4-wire)",
