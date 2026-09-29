@@ -42,6 +42,15 @@ h1{font-family:var(--display);font-weight:600;font-size:2.3rem;line-height:1.05;
 .cats td:first-child,.cats th:first-child{text-align:left}
 .cats tr:last-child td{border-bottom:0;font-weight:600}
 .help{color:var(--muted);font-size:.85rem}
+.order{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px 16px}
+.order h2{font-family:var(--display);font-weight:600;font-size:1.3rem;text-transform:uppercase;letter-spacing:.05em;margin:0 0 4px}
+.order .ph{margin:14px 0 6px;font-weight:600;font-size:.9rem;color:var(--accent)}
+.order ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.order li{display:grid;grid-template-columns:2.2em 1fr;gap:2px 8px}
+.order .rk{font-family:var(--mono);font-weight:500;color:var(--muted);text-align:right}
+.order .it{font-weight:600}
+.order .wy{grid-column:2;color:var(--muted);font-size:.85rem}
+.rankpill{font-family:var(--mono);font-size:.75rem;color:var(--muted);margin-right:6px}
 .err{background:var(--fee-soft);color:var(--fee);padding:12px;border-radius:6px}
 </style></head><body><div class="wrap">
 <div class="crumb"><a href="./">← Renovation home</a></div>
@@ -49,6 +58,7 @@ h1{font-family:var(--display);font-weight:600;font-size:2.3rem;line-height:1.05;
 <h1>Purchase Tracker</h1>
 <p class="sub">Every appliance, fixture and material being bought for the renovation, with its price and where it stands. Prices marked “TBD” aren't in the totals yet.</p>
 </header>
+<section class="order" id="order"></section>
 <section class="tiles" id="tiles"></section>
 <section class="cats"><div class="label" style="margin-bottom:6px">By category</div><table id="cats"></table></section>
 <section class="filters" id="filters"></section>
@@ -81,14 +91,22 @@ function render(){
     `<tr><td>Total</td><td class="num">${money(sum(committed))}</td><td class="num">${money(sum(planned))}</td><td class="num">${items.filter(i=>i.unit_price==null).length}</td></tr>`;
   const btn=(v,cur,kind)=>`<button data-k="${kind}" data-v="${esc(v)}" class="${v===cur?"on":""}">${esc(v)}</button>`;
   $("#filters").innerHTML=["All",...STATUSES].map(s=>btn(s,fStatus,"s")).join("")+`<span class="sep"></span>`+["All",...cats].map(c=>btn(c,fCat,"c")).join("");
-  const shown=items.filter(i=>(fStatus==="All"||i.status===fStatus)&&(fCat==="All"||i.category===fCat));
+  const todo=items.filter(i=>i.rank!=null&&!COMMITTED.has(i.status)).sort((a,b)=>a.rank-b.rank);
+  let ph="",html=`<h2>Buy order</h2><p class="help" style="margin:0">Stack-ranked by what blocks other work and what could sell out. Ordered, delivered and installed items drop off.</p>`;
+  for(const i of todo){
+    if(i.phase!==ph){html+=(ph?"</ol>":"")+`<div class="ph">${esc(i.phase)}</div><ol>`;ph=i.phase}
+    const name=i.url?`<a href="${esc(i.url)}" target="_blank" rel="noopener">${esc(i.item)}</a>`:esc(i.item);
+    html+=`<li><span class="rk">${i.rank}</span><span class="it"><span class="pill st-${esc(i.status)}">${esc(i.status)}</span>${name}</span><span class="wy">${esc(i.why||"")}</span></li>`;
+  }
+  $("#order").innerHTML=html+(ph?"</ol>":"");
+  const shown=items.filter(i=>(fStatus==="All"||i.status===fStatus)&&(fCat==="All"||i.category===fCat)).sort((a,b)=>(a.rank??999)-(b.rank??999));
   $("#list").innerHTML=shown.map(i=>{
     const meta=[i.category,i.room,[i.brand,i.model].filter(Boolean).join(" "),i.vendor].filter(Boolean).map(esc).join(" · ");
     const t=total(i);
     const unit=i.unit_price==null?"":`${money(i.unit_price)} × ${i.qty} ${esc(i.unit)}`;
     const was=i.list_price&&i.list_price>i.unit_price?` <s>${money(i.list_price)}</s>`:"";
     const name=i.url?`<a href="${esc(i.url)}" target="_blank" rel="noopener">${esc(i.item)}</a>`:esc(i.item);
-    return `<article class="row"><div><div class="t"><span class="pill st-${esc(i.status)}">${esc(i.status)}</span>${name}</div><div class="m">${meta}</div></div>
+    return `<article class="row"><div><div class="t">${i.rank!=null?`<span class="rankpill">#${i.rank}</span>`:""}<span class="pill st-${esc(i.status)}">${esc(i.status)}</span>${name}</div><div class="m">${meta}</div></div>
     <div class="price num">${money(t)}<small>${i.qty>1||i.fee?unit:""}${was}${i.fee?' <span class="feeflag">+20% GC fee</span>':""}</small></div>
     ${i.notes?`<div class="notes">${esc(i.notes)}</div>`:""}</article>`}).join("")||`<p class="help">Nothing matches these filters.</p>`;
 }
